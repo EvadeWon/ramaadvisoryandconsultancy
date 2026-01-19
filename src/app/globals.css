@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* Professional Corporate Design System for Ramaadvisoryandconsultancy */
+
+@theme inline {
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-foreground: hsl(var(--foreground));
+  --color-background: hsl(var(--background));
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Navy Blue Primary */
+    --primary: 220 60% 25%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light Gray Secondary */
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 220 30% 15%;
+
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Gold Accent */
+    --accent: 42 85% 55%;
+    --accent-foreground: 220 30% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 88%;
+    --input: 220 20% 88%;
+    --ring: 220 60% 25%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --navy: 220 60% 25%;
+    --navy-light: 220 50% 35%;
+    --navy-dark: 220 65% 18%;
+    --gold: 42 85% 55%;
+    --gold-light: 42 75% 65%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 30% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 30% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 42 85% 55%;
+    --primary-foreground: 220 30% 8%;
+
+    --secondary: 220 30% 18%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 30% 18%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 220 50% 35%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 30% 22%;
+    --input: 220 30% 22%;
+    --ring: 42 85% 55%;
+
+    --navy: 220 50% 35%;
+    --navy-light: 220 45% 45%;
+    --navy-dark: 220 60% 25%;
+    --gold: 42 85% 55%;
+    --gold-light: 42 75% 65%;
+
+    --sidebar-background: 220 30% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 42 85% 55%;
+    --sidebar-primary-foreground: 220 30% 8%;
+    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 30% 22%;
+    --sidebar-ring: 42 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

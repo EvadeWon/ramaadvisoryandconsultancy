@@ -129,9 +129,11 @@ const ContactForm = () => {
                         <SelectTrigger>
                             <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent position="popper"
+                            sideOffset={8}
+                            className="bg-white shadow-lg border rounded-md">
                             {services.map((service) => (
-                                <SelectItem key={service} value={service}>
+                                <SelectItem className="hover:bg-amber-500 hover:cursor-pointer" key={service} value={service}>
                                     {service}
                                 </SelectItem>
                             ))}

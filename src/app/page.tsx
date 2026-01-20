@@ -134,8 +134,8 @@ export default function HomePage() {
       {/* Why Choose Us */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">
+          <div className="mb-12">
+            <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-bold">
               Why Choose Ramaadvisoryandconsultancy?
             </h2>
           </div>

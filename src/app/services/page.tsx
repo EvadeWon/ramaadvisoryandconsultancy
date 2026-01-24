@@ -129,9 +129,10 @@ const Services = () => {
                                     `<span style="color:#ffffff;font-weight:bold;">INCOME TAX FILING</span>`,
                                     `<span style="color:#f38a3f;font-weight:bold;">ACCOUNTING</span>`],
                                 autoStart: true,
-                                delay: 50,
+                                delay: 80,
                                 deleteSpeed: 40,
-                                loop: true
+                                loop: true,
+                                cursor:""
                             }}
                         />
                     </p>

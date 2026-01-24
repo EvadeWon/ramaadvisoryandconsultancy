@@ -18,14 +18,93 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ServiceCard from "@/components/ServiceCard";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 export default function HomePage() {
-  const [animate, setAnimate] = useState(false);
+  const [animate, setAnimate] = useState<boolean>(false);
+  function StatItem({
+    number,
+    suffix,
+    label,
+  }: {
+    number: number;
+    suffix: string;
+    label: string;
+  }) {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [count, setCount] = useState<number>(0);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+            setCount(0);
+          }
+        },
+        { threshold: 0.3 }
+      );
+
+      if (ref.current) observer.observe(ref.current);
+
+      return () => {
+        if (ref.current) observer.unobserve(ref.current);
+      };
+    }, []);
+
+    // 🔢 Counter
+    useEffect(() => {
+      if (!isVisible) return;
+
+      let start = 0;
+      const end = number;
+      const duration = 1000;
+      const stepTime = 20;
+      const step = Math.ceil(end / (duration / stepTime));
+
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        setCount(start);
+      }, stepTime);
+
+      return () => clearInterval(timer);
+    }, [isVisible, number]);
+
+    return (
+      <div
+        ref={ref}
+        className={`text-center transition-all duration-700 ease-out
+        ${isVisible
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 translate-x-10"}
+      `}
+      >
+        <span className="text-lg font-bold">
+          {count}
+          {suffix}
+        </span>
+        <p className="text-sm text-gray-600">{label}</p>
+      </div>
+    );
+  }
+
   useEffect(() => {
     setAnimate(true);
   }, []);
-  const services = [
+
+  type servicesItems = {
+    icon: LucideIcon,
+    title: string,
+    description: string,
+    features: string[],
+  }
+  const services: servicesItems[] = [
     {
       icon: FileText,
       title: "Tax Filing & Returns",
@@ -77,6 +156,7 @@ export default function HomePage() {
     { number: 100, suffix: "%", label: "Compliance Rate" },
   ];
 
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -118,10 +198,7 @@ export default function HomePage() {
       <section className="py-12 bg-[#f3f4f7]">
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <span>{stat.number}</span>
-              <p className="text-sm text-gray-600">{stat.label}</p>
-            </div>
+            <StatItem key={index} {...stat} />
           ))}
         </div>
       </section>

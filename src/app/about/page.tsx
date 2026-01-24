@@ -9,6 +9,7 @@ import {
     CheckCircle2,
     Eye,
     Heart,
+    LucideIcon,
     Target,
 } from "lucide-react";
 import Link from "next/link";
@@ -16,11 +17,16 @@ import { useEffect, useState } from "react";
 import Typewriter from 'typewriter-effect';
 
 const About = () => {
-    const [animate, setAnimate] = useState(false);
+    const [animate, setAnimate] = useState<boolean>(false);
     useEffect(() => {
         setAnimate(true);
     }, []);
-    const values = [
+    type valueItem={
+        icon:LucideIcon,
+        title:string,
+        description:string
+    }
+    const values:valueItem[] = [
         {
             icon: Target,
             title: "Mission",
@@ -72,9 +78,10 @@ const About = () => {
                                     `<span style="color:#70e000;font-weight:bold;">WHY WE EXIST?</span>`,
                                     `<span style="color:#ffffff;font-weight:bold;">WHY WE CAN BE TRUSTED?</span>`],
                                 autoStart: true,
-                                delay: 200,
+                                delay: 80,
                                 deleteSpeed: 40,
-                                loop: true
+                                loop: true,
+                                cursor:""
                             }}
                         />
                     </div>

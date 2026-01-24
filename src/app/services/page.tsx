@@ -1,7 +1,9 @@
+"use client"
 import FloatingContact from "@/components/FloatingContact";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
+import Typewriter from 'typewriter-effect'
 import {
     ArrowRight,
     Building2,
@@ -13,9 +15,14 @@ import {
     Scale
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 
 const Services = () => {
+    const [animate,setAnimate]=useState(false);
+    useEffect(()=>{
+        setAnimate(true);
+    },[])
     const services = [
         {
             icon: FileText,
@@ -110,9 +117,23 @@ const Services = () => {
             {/* Hero Section */}
             <section className="bg-[#193366] text-white py-16 md:py-26">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
+                    <h1 className={`font-serif text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000
+                        ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+                        `}>OUR SERVICES</h1>
                     <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                        Comprehensive financial services tailored to meet the unique needs of your business.
+                        <Typewriter
+                            options={{
+                                strings: [
+                                    `<span style="color:#EEB32B;font-weight:bold;">TDS RETURN</span>`,
+                                    `<span style="color:#70e000;font-weight:bold;">GST COMPLIANCES</span>`,
+                                    `<span style="color:#ffffff;font-weight:bold;">INCOME TAX FILING</span>`,
+                                    `<span style="color:#f38a3f;font-weight:bold;">ACCOUNTING</span>`],
+                                autoStart: true,
+                                delay: 50,
+                                deleteSpeed: 40,
+                                loop: true
+                            }}
+                        />
                     </p>
                 </div>
             </section>

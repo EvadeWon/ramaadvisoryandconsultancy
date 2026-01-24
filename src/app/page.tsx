@@ -19,10 +19,12 @@ import Header from "@/components/Header";
 import ServiceCard from "@/components/ServiceCard";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import CountUp from "react-countup";
+import ScrollTrigger from 'react-scroll-trigger';
 
 export default function HomePage() {
   const [animate, setAnimate] = useState(false);
-
+  const [countOn, setCountOn] = useState(false);
   useEffect(() => {
     setAnimate(true);
   }, []);
@@ -72,10 +74,10 @@ export default function HomePage() {
   ];
 
   const stats = [
-    { number: "500+", label: "Happy Clients" },
-    { number: "5+", label: "Years Experience" },
-    { number: "1000+", label: "Tax Returns Filed" },
-    { number: "100%", label: "Compliance Rate" },
+    { number: 500, suffix: "+", label: "Happy Clients" },
+    { number: 5, suffix: "+", label: "Years Experience" },
+    { number: 1000, suffix: "+", label: "Tax Returns Filed" },
+    { number: 100, suffix: "%", label: "Compliance Rate" },
   ];
 
   return (
@@ -89,9 +91,7 @@ export default function HomePage() {
             <h1 className={`text-white font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 transition-all duration-1000
       ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               Trusted Financial
-              <span className="block text-[#EEB32B]
-
-">
+              <span className="block text-[#EEB32B]">
                 Advisory & Consultancy
               </span>
             </h1>
@@ -122,9 +122,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <p className="text-2xl text-[#193366] font-bold text-primary">
-                {stat.number}
-              </p>
+              <ScrollTrigger onEnter={() => setCountOn(true)} onExit={() => setCountOn(false)}>
+                <p className="text-2xl text-[#1B2232] font-bold text-primary">
+                  {countOn && <CountUp start={0} end={stat.number} duration={2} delay={0} />}
+                </p>
+              </ScrollTrigger>
+              <span>{stat.suffix}</span>
               <p className="text-sm text-gray-600">{stat.label}</p>
             </div>
           ))}
@@ -141,10 +144,10 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Feature icon={Shield} title="Trusted Expertise" description="Years of experience in handling complex tax and accounting matters."/>
-            <Feature icon={Users} title="Client-Focused" description="Personalized solutions tailored to your specific business needs."/>
-            <Feature icon={Award} title="Quality Assurance" description="100% compliance rate with all regulatory requirements."/>
-            <Feature icon={Clock} title="Timely Delivery" description="Meeting all deadlines without compromising on accuracy."/>
+            <Feature icon={Shield} title="Trusted Expertise" description="Years of experience in handling complex tax and accounting matters." />
+            <Feature icon={Users} title="Client-Focused" description="Personalized solutions tailored to your specific business needs." />
+            <Feature icon={Award} title="Quality Assurance" description="100% compliance rate with all regulatory requirements." />
+            <Feature icon={Clock} title="Timely Delivery" description="Meeting all deadlines without compromising on accuracy." />
           </div>
         </div>
       </section>
@@ -184,7 +187,7 @@ function Feature({
 }: {
   icon: LucideIcon;
   title: string;
-  description:string;
+  description: string;
 }) {
   return (
     <div className="text-center p-6">

@@ -12,8 +12,14 @@ import {
     Target,
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import Typewriter from 'typewriter-effect';
 
 const About = () => {
+    const [animate, setAnimate] = useState(false);
+    useEffect(() => {
+        setAnimate(true);
+    }, []);
     const values = [
         {
             icon: Target,
@@ -53,12 +59,27 @@ const About = () => {
             {/* Hero Section */}
             <section className="bg-[#193366] text-white py-16 md:py-26">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-                        About Us
+                    <h1 className={`font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-1000
+                        ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+                        `}>
+                        ABOUT US
                     </h1>
-                    <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                        Learn more about Ramaadvisoryandconsultancy and our commitment to
-                        excellence in financial services.
+                    <p className={`text-lg opacity-90 max-w-2xl mx-auto transition-all duration-1000 ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+                        <Typewriter
+                            options={{
+                                strings: [
+                                    `<span style="color:#EEB32B;font-weight:bold;">WHO WE ARE?</span>`,
+                                    `<span style="color:#70e000;font-weight:bold;">WHY WE EXIST?</span>`,
+                                    `<span style="color:#ffffff;font-weight:bold;">WHY WE CAN BE TRUSTED?</span>`],
+                                autoStart: true,
+                                delay: 200,
+                                deleteSpeed: 40,
+                                loop: true
+                            }}
+                        />
+                    </p>
+                    <p className="text-lg opacity-90 max-w-4xl mx-auto">
+                        Rama Advisory & Consultancy is a professional financial and compliance services firm dedicated to helping businesses and individuals manage their accounting, taxation, and regulatory requirements with confidence.
                     </p>
                 </div>
             </section>

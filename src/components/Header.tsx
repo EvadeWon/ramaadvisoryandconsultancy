@@ -23,7 +23,7 @@ const Header = () => {
         pathname === path || pathname.startsWith(path + "/");
 
     return (
-        <header className="sticky top-0 left-0 w-full z-50 bg-white/60 backdrop-blur border-black/5">
+        <header className="sticky top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-black/5">
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
 
@@ -42,9 +42,9 @@ const Header = () => {
                                 key={link.path}
                                 href={link.path}
                                 className={cn(
-                                    "text-xs font-medium transition-colors hover:text-primary",
+                                    "text-xs font-medium transition-colors hover:text-green-800",
                                     isActive(link.path)
-                                        ? "text-primary"
+                                        ? "text-black"
                                         : "text-muted-foreground"
                                 )}
                             >

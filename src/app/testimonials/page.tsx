@@ -1,3 +1,4 @@
+"use client"
 import FloatingContact from "@/components/FloatingContact";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -5,8 +6,13 @@ import TestimonialCard from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Quote } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Testimonials = () => {
+    const [animate,setAnimate]=useState(false);
+    useEffect(()=>{
+        setAnimate(true);
+    },[])
     const testimonials = [
         {
             name: "Rajesh Kumar",
@@ -65,7 +71,7 @@ const Testimonials = () => {
             {/* Hero Section */}
             <section className="bg-[#193366] text-white py-16 md:py-26">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Client Testimonials</h1>
+                    <h1 className={`font-serif text-4xl md:text-5xl font-bold mb-4 duration-1000 transition-all ${animate?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>CLIENT FEEDBACK</h1>
                     <p className="text-lg opacity-90 max-w-2xl mx-auto">
                         Do not just take our word for it. Here is what our valued clients have to say about our services.
                     </p>

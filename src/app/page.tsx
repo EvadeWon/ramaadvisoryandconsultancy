@@ -19,12 +19,9 @@ import Header from "@/components/Header";
 import ServiceCard from "@/components/ServiceCard";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import CountUp from "react-countup";
-import ScrollTrigger from 'react-scroll-trigger';
 
 export default function HomePage() {
   const [animate, setAnimate] = useState(false);
-  const [countOn, setCountOn] = useState(false);
   useEffect(() => {
     setAnimate(true);
   }, []);
@@ -122,12 +119,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <ScrollTrigger onEnter={() => setCountOn(true)} onExit={() => setCountOn(false)}>
-                <p className="text-2xl text-[#1B2232] font-bold text-primary">
-                  {countOn && <CountUp start={0} end={stat.number} duration={2} delay={0} />}
-                </p>
-              </ScrollTrigger>
-              <span>{stat.suffix}</span>
+              <span>{stat.number}</span>
               <p className="text-sm text-gray-600">{stat.label}</p>
             </div>
           ))}

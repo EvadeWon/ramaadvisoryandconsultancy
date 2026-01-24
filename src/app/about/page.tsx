@@ -64,7 +64,7 @@ const About = () => {
                         `}>
                         ABOUT US
                     </h1>
-                    <p className={`text-lg opacity-90 max-w-2xl mx-auto transition-all duration-1000 ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+                    <div className={`text-lg opacity-90 max-w-2xl mx-auto transition-all duration-1000 ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
                         <Typewriter
                             options={{
                                 strings: [
@@ -77,7 +77,7 @@ const About = () => {
                                 loop: true
                             }}
                         />
-                    </p>
+                    </div>
                     <p className="text-lg opacity-90 max-w-4xl mx-auto">
                         Rama Advisory & Consultancy is a professional financial and compliance services firm dedicated to helping businesses and individuals manage their accounting, taxation, and regulatory requirements with confidence.
                     </p>

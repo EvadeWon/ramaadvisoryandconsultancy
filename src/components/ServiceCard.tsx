@@ -1,35 +1,50 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+// components/ServiceCard.tsx
+"use client"
+import { useInView } from "@/hooks/useInView";
 import { LucideIcon } from "lucide-react";
 
-interface ServiceCardProps {
+type ServiceCardProps = {
     icon: LucideIcon;
     title: string;
     description: string;
     features: string[];
-}
-
-const ServiceCard = ({ icon: Icon, title, description, features }: ServiceCardProps) => {
-    return (
-        <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border bg-card">
-            <CardHeader>
-                <div className="w-14 h-14 bg-white/40 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#193366] group-hover:text-white transition-colors">
-                    <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                <CardTitle className="font-serif text-xl">{title}</CardTitle>
-                <CardDescription className="text-muted-foreground">{description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <ul className="space-y-2">
-                    {features.map((feature, index) => (
-                        <li key={index} className="flex items-start space-x-2 text-sm text-muted-foreground">
-                            <span className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
-                            <span>{feature}</span>
-                        </li>
-                    ))}
-                </ul>
-            </CardContent>
-        </Card>
-    );
+    delay?: number; // staggered animation ke liye
 };
 
-export default ServiceCard;
+export default function ServiceCard({
+    icon: Icon,
+    title,
+    description,
+    features,
+    delay = 0
+}: ServiceCardProps) {
+    const { ref, isVisible } = useInView(0.2);
+
+    return (
+        <div
+            ref={ref}
+            style={{ transitionDelay: `${delay}ms` }}
+            className={`bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-700 ease-out
+        ${isVisible
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-50"}
+      `}
+        >
+            <div className="w-14 h-14 mb-4 flex items-center justify-center rounded-lg bg-[#1933661A]">
+                <Icon className="w-7 h-7 text-blue-950" />
+            </div>
+
+            <h3 className="text-xl font-semibold mb-3">{title}</h3>
+            <p className="text-gray-600 mb-4">{description}</p>
+
+            <ul className="space-y-2">
+                {features.map((feature, index) => (
+                    <li key={index} className="flex items-center text-sm text-gray-700">
+                        <span className="w-1.5 h-1.5 bg-blue-950 rounded-full mr-2"></span>
+                        {feature}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}

@@ -18,81 +18,12 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ServiceCard from "@/components/ServiceCard";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import StatItem from "@/components/StatItem";
+import Feature from "@/components/Feature";
+
 export default function HomePage() {
   const [animate, setAnimate] = useState<boolean>(false);
-  function StatItem({
-    number,
-    suffix,
-    label,
-  }: {
-    number: number;
-    suffix: string;
-    label: string;
-  }) {
-    const ref = useRef<HTMLDivElement | null>(null);
-    const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [count, setCount] = useState<number>(0);
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          } else {
-            setIsVisible(false);
-            setCount(0);
-          }
-        },
-        { threshold: 0.3 }
-      );
-
-      if (ref.current) observer.observe(ref.current);
-
-      return () => {
-        if (ref.current) observer.unobserve(ref.current);
-      };
-    }, []);
-
-    // 🔢 Counter
-    useEffect(() => {
-      if (!isVisible) return;
-
-      let start = 0;
-      const end = number;
-      const duration = 1000;
-      const stepTime = 20;
-      const step = Math.ceil(end / (duration / stepTime));
-
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= end) {
-          start = end;
-          clearInterval(timer);
-        }
-        setCount(start);
-      }, stepTime);
-
-      return () => clearInterval(timer);
-    }, [isVisible, number]);
-
-    return (
-      <div
-        ref={ref}
-        className={`text-center transition-all duration-700 ease-out
-        ${isVisible
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 translate-x-10"}
-      `}
-      >
-        <span className="text-lg font-bold">
-          {count}
-          {suffix}
-        </span>
-        <p className="text-sm text-gray-600">{label}</p>
-      </div>
-    );
-  }
 
   useEffect(() => {
     setAnimate(true);
@@ -198,7 +129,7 @@ export default function HomePage() {
       <section className="py-12 bg-[#f3f4f7]">
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <StatItem key={index} {...stat} />
+            <StatItem key={index} number={stat.number} suffix={stat.suffix} label={stat.label} />
           ))}
         </div>
       </section>
@@ -212,8 +143,8 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Feature icon={Shield} title="Trusted Expertise" description="Years of experience in handling complex tax and accounting matters." />
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8`}>
+            <Feature icon={Shield} title="Trusted Expertise" description="Years of experience in handling complex tax and accounting matters."/>
             <Feature icon={Users} title="Client-Focused" description="Personalized solutions tailored to your specific business needs." />
             <Feature icon={Award} title="Quality Assurance" description="100% compliance rate with all regulatory requirements." />
             <Feature icon={Clock} title="Timely Delivery" description="Meeting all deadlines without compromising on accuracy." />
@@ -226,7 +157,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <h1 className="text-center text-3xl font-bold">Our services</h1>
           <p className="text-center text-gray-600 mb-10">Comprehensive financial services to support every aspect of your business journey.</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 bg">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
@@ -245,26 +176,6 @@ export default function HomePage() {
 
       <Footer />
       <FloatingContact />
-    </div>
-  );
-}
-
-function Feature({
-  icon: Icon,
-  title,
-  description
-}: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="text-center p-6">
-      <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#1933661A]">
-        <Icon className="w-8 h-8 text-blue-950" />
-      </div>
-      <h3 className="font-semibold">{title}</h3>
-      <p className="text-[#625d84]">{description}</p>
     </div>
   );
 }
